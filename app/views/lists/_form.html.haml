@@ -7,7 +7,10 @@
       = f.simple_fields_for :list_fields do |field|
         = render "#{field.object.model_name.singular}_fields", :f => field
       .links
-        = link_to_add_association 'add user field', f, :list_fields, partial: 'user_field_fields', wrap_object: Proc.new {|o| UserField.new(o.attributes) }
-        = link_to_add_association 'add text field', f, :list_fields, partial: 'text_field_fields', wrap_object: Proc.new {|o| TextField.new(o.attributes) }
+        .btn-group
+          = link_to_add_association 'Add user field', f, :list_fields, partial: 'user_field_fields', wrap_object: Proc.new {|o| UserField.new(o.attributes) }, class: "btn btn-default"
+          = link_to_add_association 'Add text field', f, :list_fields, partial: 'text_field_fields', wrap_object: Proc.new {|o| TextField.new(o.attributes) }, class: "btn btn-default"
   .form-actions
-    = f.button :submit
+    .btn-group.pull-right
+      = link_to 'Back', lists_path, class: "btn btn-default"
+      = f.button :submit, class: "btn-success"
