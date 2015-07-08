@@ -36,7 +36,9 @@ class User
 
   field :first_name, type: String
   field :last_name, type: String
+  field :transcript_number, type: String
   field :accounts_api_id, type: String
+  field :username, type: String
 
   has_many :lists, foreign_key: 'owner_id'
 

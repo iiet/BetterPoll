@@ -3,7 +3,6 @@ require 'omniauth-oauth2'
 module OmniAuth
   module Strategies
     class AccountsApi < OmniAuth::Strategies::OAuth2
-      # change the class name and the :name option to match your application name
       option :name, :accounts_api
 
       option :client_options, {
@@ -15,18 +14,19 @@ module OmniAuth
 
       info do
         {
-          login: raw_info['login'],
+          username: raw_info['login'],
           first_name: raw_info['first_name'],
           last_name: raw_info['last_name'],
-          email: raw_info['email']
+          email: raw_info['email'],
+          transcript_number: raw_info['transcript_number']
         }
       end
 
-      option :authorize_params, { scope: ['public','extended'].join(" ") }
+      option :authorize_params, { scope: ['public','extended','transcript_number'].join(" ") }
 
       def raw_info
         @raw_info ||= access_token.get('/oauth/v1/extended').parsed
-        pp @raw_info
+        @raw_info.merge(access_token.get('/oauth/v1/transcript_number').parsed)
       end
     end
   end
