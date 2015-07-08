@@ -1,0 +1,6 @@
+.nested-fields
+  = f.input :name
+  = f.input :required
+  = f.input :max_length
+  = f.hidden_field :_type, value: 'TextField'
+  = link_to_remove_association "remove field", f

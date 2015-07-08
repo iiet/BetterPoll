@@ -42,5 +42,10 @@ group :development, :test do
 end
 
 # mongo
-gem 'mongo_mapper'
-gem 'bson_ext'
+gem 'mongoid'
+gem 'mongoid_optimistic_locking'
+
+gem 'bootstrap-sass'
+gem 'simple_form'
+gem 'haml-rails'
+gem 'cocoon'

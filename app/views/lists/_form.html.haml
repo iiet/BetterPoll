@@ -1,0 +1,13 @@
+= simple_form_for(@list) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :name
+    %h3 Fields
+    #list_fields
+      = f.simple_fields_for :list_fields do |field|
+        = render "#{field.object.model_name.singular}_fields", :f => field
+      .links
+        = link_to_add_association 'add user field', f, :list_fields, partial: 'user_field_fields', wrap_object: Proc.new {|o| UserField.new(o.attributes) }
+        = link_to_add_association 'add text field', f, :list_fields, partial: 'text_field_fields', wrap_object: Proc.new {|o| TextField.new(o.attributes) }
+  .form-actions
+    = f.button :submit
