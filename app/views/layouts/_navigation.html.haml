@@ -2,7 +2,7 @@
   .container
     .navbar-header
       %a.navbar-brand{href: '#'}
-        %span{class: "glyphicon glyphicon-stats", 'aria-hidden': "true"}
+        %span{class: "glyphicon glyphicon-stats", 'aria-hidden' => "true"}
       %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
         %span.sr-only Toggle navigation
         %span.icon-bar
@@ -12,3 +12,7 @@
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
         = render 'layouts/navigation_links'
+
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          = link_to "Logout", destroy_user_session_path, method: :delete
