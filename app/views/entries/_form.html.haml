@@ -1,0 +1,9 @@
+= simple_form_for(@entry, url: entries_list_path) do |f|
+  = f.error_notification
+  .form-inputs
+    %h3 Fields
+    #entry_fields
+      = f.simple_fields_for :entry_fields do |field|
+        = render "entries/#{field.object.model_name.singular}", :f => field
+  .form-actions
+    = f.button :submit

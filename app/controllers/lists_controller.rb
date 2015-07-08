@@ -4,7 +4,10 @@ class ListsController < ApplicationController
   before_action :check_ownership, only: [:edit, :update, :destroy]
 
   def new_entry
-    @entry = @list.entries.new
+    @entry = @list.entries.new(entry_fields: @list.list_fields.map { |f| f.build_entry_field })
+  end
+
+  def create_entry
 
   end
 

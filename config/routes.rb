@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :lists do
     member do
       get 'new_entry'
+      post 'entries', to: 'lists#create_entry'
     end
   end
   root to: 'lists#index'

@@ -17,7 +17,7 @@ class List
   validates_presence_of :name
 
   def fields_map
-    @fields_map ||= Hash[fields.map {|f| [f.id, f]}]
+    @fields_map ||= Hash[list_fields.map {|f| [f.id, f]}]
   end
 
 end

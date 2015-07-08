@@ -7,11 +7,11 @@ class EntryField
   field :field_id, type: BSON::ObjectId
 
   def entry
-    _parent_document
+    _parent
   end
 
   def list
-    _parent_document._parent_document
+    _parent._parent
   end
 
   def field
