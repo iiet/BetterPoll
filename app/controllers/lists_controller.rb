@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:show, :edit, :update, :destroy, :new_entry]
+  before_action :set_list, only: [:show, :edit, :update, :destroy, :new_entry, :create_entry]
   before_action :authenticate_user!
   before_action :check_ownership, only: [:edit, :update, :destroy]
 
@@ -8,7 +8,9 @@ class ListsController < ApplicationController
   end
 
   def create_entry
-
+    entry = @list.entries.new(entry_params.merge(user: current_user))
+    entry.save
+    redirect_to @list
   end
 
   # GET /lists
@@ -92,5 +94,15 @@ class ListsController < ApplicationController
           :max_length,
           :required
         ])
+    end
+
+    def entry_params
+      params.require(:entry).permit(entry_fields_attributes:
+        [
+          :_type,
+          :field_id,
+          :value
+        ]
+      )
     end
 end
