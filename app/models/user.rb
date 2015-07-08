@@ -1,8 +1,8 @@
 class User
   include Mongoid::Document
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  # :confirmable, :lockable, :timeoutable and 
+  devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
   ## Database authenticatable
@@ -36,7 +36,28 @@ class User
 
   field :first_name, type: String
   field :last_name, type: String
+  field :accounts_api_id, type: String
 
   has_many :lists, foreign_key: 'owner_id'
+
+  def self.find_for_accounts_api(data)
+    @user = User.find_by(accounts_api_id: data['uid'])
+    unless @user
+      @user = User.create!(
+        email: data['info']['email'],
+        accounts_api_id: data['uid'],
+        password: Devise.friendly_token.first(10),
+        first_name: data['info']['first_name'],
+        last_name: data['info']['last_name'],
+        transcript_number: data['info']['transcript_number'],
+        username: data['info']['username']
+      )
+    end
+    @user
+  end
+
+  def full_name
+    "#{first_name} #{last_name} (#{username})"
+  end
 
 end
