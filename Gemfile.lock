@@ -68,6 +68,7 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise-bootstrap-views (0.0.5)
     erubis (2.7.0)
     execjs (2.5.2)
     faraday (0.9.1)
@@ -219,6 +220,7 @@ DEPENDENCIES
   cocoon
   coffee-rails (~> 4.1.0)
   devise
+  devise-bootstrap-views
   figaro
   haml-rails
   jbuilder (~> 2.0)
@@ -237,4 +239,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.10.4
+   1.10.5
