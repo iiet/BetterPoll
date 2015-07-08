@@ -1,5 +1,7 @@
 class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :check_ownership, only: [:edit, :update, :destroy]
 
   # GET /lists
   # GET /lists.json
@@ -24,7 +26,7 @@ class ListsController < ApplicationController
   # POST /lists
   # POST /lists.json
   def create
-    @list = List.new(list_params)
+    @list = current_user.lists.new(list_params)
 
     respond_to do |format|
       if @list.save
@@ -41,7 +43,6 @@ class ListsController < ApplicationController
   # PATCH/PUT /lists/1.json
   def update
     respond_to do |format|
-      p list_params
       if @list.update(list_params)
         format.html { redirect_to @list, notice: 'List was successfully updated.' }
         format.json { render :show, status: :ok, location: @list }
@@ -63,6 +64,10 @@ class ListsController < ApplicationController
   end
 
   private
+    def check_ownership
+      raise NotAuthorized if @list.owner_id if current_user.id
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_list
       @list = List.find(params[:id])
