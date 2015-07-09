@@ -1,5 +1,6 @@
 .nested-fields
   = f.input :name
+  = f.input :public, as: :boolean
   = f.input :required
   = f.input :max_length
   = f.hidden_field :_type, value: 'TextField'

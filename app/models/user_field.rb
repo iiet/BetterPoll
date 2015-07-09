@@ -1,6 +1,6 @@
 class UserField < ListField
 
-  USER_ATTRIBUTES = ['first_name', 'last_name']
+  USER_ATTRIBUTES = ['first_name', 'last_name', 'email', 'transcript_number', 'username']
 
   field :name, type: String
 

@@ -75,7 +75,7 @@ class ListsController < ApplicationController
 
   private
     def check_ownership
-      raise NotAuthorized if @list.owner_id if current_user.id
+      raise NotAuthorized if @list.owner_id != current_user.id
     end
 
     # Use callbacks to share common setup or constraints between actions.
