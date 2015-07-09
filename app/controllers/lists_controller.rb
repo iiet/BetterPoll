@@ -39,18 +39,6 @@ class ListsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def list_params
-      params.require(:list).permit(:name, list_fields_attributes: 
-        [
-          :id,
-          :_destroy,
-          :_type,
-          :name,
-          :max_length,
-          :required
-        ])
-    end
-
     def entry_params
       begin
         params.require(:entry).permit(entry_fields_attributes:

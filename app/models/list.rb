@@ -3,6 +3,8 @@ class List
   # include Mongoid::OptimisticLocking
 
   field :name, type: String
+  field :max_entries, type: Integer
+
 
   belongs_to :owner, class_name: 'User'
   field :owner_full_name, type: String, default: "" # cache
@@ -17,6 +19,7 @@ class List
   validates_associated :list_fields
   validates_associated :entries
   validates_presence_of :name
+  validates_numericality_of :max_entries, only_integer: true, greater_than: 0, if: -> { max_entries.present? }
 
   def instant_enroll?
     list_fields.select {|f| f.class != UserField}.empty?
