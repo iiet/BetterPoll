@@ -6,6 +6,9 @@ Rails.application.routes.draw do
       post 'entries', to: 'lists#create_entry'
     end
   end
+
+  resources :my_lists
+
   root to: 'lists#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

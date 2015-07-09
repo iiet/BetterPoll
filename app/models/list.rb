@@ -5,6 +5,8 @@ class List
   field :name, type: String
 
   belongs_to :owner, class_name: 'User'
+  field :owner_full_name, type: String, default: "" # cache
+
   has_many :users
 
   embeds_many :list_fields
@@ -18,6 +20,10 @@ class List
 
   def fields_map
     @fields_map ||= Hash[list_fields.map {|f| [f.id, f]}]
+  end
+
+  before_save do
+    self.owner_full_name = owner.full_name
   end
 
 end
