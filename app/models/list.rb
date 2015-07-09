@@ -19,7 +19,7 @@ class List
   validates_presence_of :name
 
   def instant_enroll?
-    !fields.detect {|f| f.class != UserField}
+    list_fields.select {|f| f.class != UserField}.empty?
   end
 
   def is_enroled?(user)

@@ -52,12 +52,16 @@ class ListsController < ApplicationController
     end
 
     def entry_params
-      params.require(:entry).permit(entry_fields_attributes:
-        [
-          :_type,
-          :field_id,
-          :value
-        ]
-      )
+      begin
+        params.require(:entry).permit(entry_fields_attributes:
+          [
+            :_type,
+            :field_id,
+            :value
+          ]
+        )
+      rescue
+        {}
+      end
     end
 end

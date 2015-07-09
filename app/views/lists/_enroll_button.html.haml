@@ -4,4 +4,7 @@
       Already enrolled
       = "(#{pluralize(list.entries.count,'entry')})"
   - else
-    = link_to "Enroll (#{pluralize(list.entries.count,'entry')} already)", new_entry_list_path(list), class: 'btn btn-primary', method: 'post'
+    -if list.instant_enroll?
+      = link_to "Enroll (#{pluralize(list.entries.count,'entry')} already)", entries_list_path(list), class: 'btn btn-primary', method: 'post'
+    -else
+      = link_to "Enroll (#{pluralize(list.entries.count,'entry')} already)", new_entry_list_path(list), class: 'btn btn-primary'
