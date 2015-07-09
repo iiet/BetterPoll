@@ -1,5 +1,6 @@
 %h1 New entry
 = render 'entries/form'
-= link_to 'Show', @list
-|
-= link_to 'Back', lists_path
+
+.btn-group
+  = link_to 'Back', lists_path, class: "btn btn-default"
+  = link_to 'Show', @list, class: "btn btn-primary"
