@@ -4,6 +4,7 @@ class List
 
   field :name, type: String
   field :max_entries, type: Integer
+  field :max_entries_per_user, type: Integer
 
 
   belongs_to :owner, class_name: 'User'
@@ -20,6 +21,7 @@ class List
   validates_associated :entries
   validates_presence_of :name
   validates_numericality_of :max_entries, only_integer: true, greater_than: 0, if: -> { max_entries.present? }
+  validates_numericality_of :max_entries_per_user, only_integer: true, greater_than: 0, if: -> { max_entries_per_user.present? }
 
   def instant_enroll?
     list_fields.select {|f| f.class != UserField}.empty?

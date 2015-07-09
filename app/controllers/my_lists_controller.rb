@@ -74,7 +74,8 @@ class MyListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
-      params.require(:list).permit(:name, :max_entries, list_fields_attributes: 
+      params.require(:list).permit(:name, :max_entries, :max_entries_per_user,
+      list_fields_attributes: 
         [
           :id,
           :_destroy,
