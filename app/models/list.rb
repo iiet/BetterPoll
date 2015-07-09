@@ -18,6 +18,14 @@ class List
   validates_associated :entries
   validates_presence_of :name
 
+  def instant_enroll?
+    !fields.detect {|f| f.class != UserField}
+  end
+
+  def is_enroled?(user)
+    entries.detect {|e| e.user == user }.present?
+  end
+
   def fields_map
     @fields_map ||= Hash[list_fields.map {|f| [f.id, f]}]
   end

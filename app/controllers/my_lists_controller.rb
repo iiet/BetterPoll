@@ -81,7 +81,8 @@ class MyListsController < ApplicationController
           :_type,
           :name,
           :max_length,
-          :required
+          :required,
+          :public
         ])
     end
 end

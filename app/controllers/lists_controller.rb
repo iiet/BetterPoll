@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:show, :edit, :update, :destroy, :new_entry, :create_entry]
+  before_action :set_list, only: [:show, :edit, :update, :destroy, :new_entry, :create_entry, :iframe]
   before_action :authenticate_user!
   before_action :check_ownership, only: [:edit, :update, :destroy]
 
@@ -11,6 +11,10 @@ class ListsController < ApplicationController
     entry = @list.entries.new(entry_params.merge(user: current_user))
     entry.save
     redirect_to @list
+  end
+
+  def iframe
+    render :iframe, layout: 'iframe'
   end
 
   # GET /lists

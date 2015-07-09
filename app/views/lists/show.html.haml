@@ -1,5 +1,25 @@
-%p#notice= notice
+%h1
+  = @list.name
+  = render partial: 'enroll_button', locals: {list: @list}
+%h3
+  Enrolled count:
+  = @list.entries.count
+
+%h3 Fields
+%ul
+  - @list.list_fields.each do |f|
+    %li
+      = f.public ? "PUBLIC" : ""
+      = f.model_name.human
+      \::
+      = f.name
+
+%h3 Iframe embed code
+%pre
+  = "<iframe src=\"#{iframe_list_url(@list)}\" style=\"width:500px; height: 70px; border:none;\"></iframe>"
+%h3 BBcode embed code
+%pre
+  = "[betterpoll=#{@list.id}][/betterpoll]"
 
 .btn-group
   = link_to 'Back', lists_path, class: "btn btn-default"
-  = link_to 'Edit', edit_list_path(@list), class: "btn btn-warning"

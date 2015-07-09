@@ -1,0 +1,7 @@
+- if current_user
+  - if list.is_enroled? current_user
+    %button.btn.btn-disabled.btn-primary{disabled: 'disabled'}
+      Already enrolled
+      = "(#{pluralize(list.entries.count,'entry')})"
+  - else
+    = link_to "Enroll (#{pluralize(list.entries.count,'entry')} already)", new_entry_list_path(list), class: 'btn btn-primary', method: 'post'

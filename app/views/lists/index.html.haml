@@ -4,6 +4,7 @@
   %thead
     %tr
       %th Name
+      %th Enrolled count
       %th Owner
       %th Actions
   %tbody
@@ -11,12 +12,12 @@
       %tr
         %td
           = list.name
+        %td= list.entries.count
         %td
           = list.owner_full_name
         %td
           .btn-group
             = link_to 'Show', list, class: "btn btn-primary"
-            
-%br/
+            = render partial: 'enroll_button', locals: {list: list}
 
-= link_to 'New List', new_list_path, class: "btn btn-default"
+%br/

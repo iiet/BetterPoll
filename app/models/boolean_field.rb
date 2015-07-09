@@ -1,0 +1,2 @@
+class BooleanField < ListField
+end

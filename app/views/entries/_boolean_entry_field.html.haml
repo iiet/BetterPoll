@@ -1,0 +1,5 @@
+%h2= f.object.field.name
+.nested-fields
+  = f.input :value, as: :boolean
+  = f.hidden_field :field_id, value: f.object.field_id
+  = f.hidden_field :_type, value: 'BooleanEntryField'

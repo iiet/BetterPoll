@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     member do
       get 'new_entry'
       post 'entries', to: 'lists#create_entry'
+      get 'iframe'
     end
   end
 
