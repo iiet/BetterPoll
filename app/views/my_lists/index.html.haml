@@ -1,10 +1,12 @@
 %p#notice= notice
-%h1 Listing Lists
+%h1 
+  My lists
+  = link_to 'New List', new_my_list_path, class: "btn btn-default btn-lg"
 %table.table.table-striped.table-bordered
   %thead
     %tr
       %th Name
-      %th List id
+      %th Entries count
       %th Actions
   %tbody
     - @lists.each do |list|
@@ -12,12 +14,10 @@
         %td
           = list.name
         %td
-          = list.id
+          = list.entries.count
         %td
           .btn-group
             = link_to 'Show', my_list_path(list), class: "btn btn-primary"
             = link_to 'Edit', edit_my_list_path(list), class: "btn btn-warning"
             = link_to 'Destroy', my_list_path(list), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
-%br/
 
-= link_to 'New List', new_my_list_path, class: "btn btn-default"
