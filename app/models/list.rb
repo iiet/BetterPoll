@@ -1,6 +1,7 @@
 class List
   include Mongoid::Document
   # include Mongoid::OptimisticLocking
+  include Mongoid::Timestamps
 
   field :name, type: String
   field :max_entries, type: Integer
@@ -22,6 +23,10 @@ class List
   validates_presence_of :name
   validates_numericality_of :max_entries, only_integer: true, greater_than: 0, if: -> { max_entries.present? }
   validates_numericality_of :max_entries_per_user, only_integer: true, greater_than: 0, if: -> { max_entries_per_user.present? }
+
+  def public_list_fields
+    list_fields.select {|f| f.public}
+  end
 
   def can_enroll?(user)
     (max_entries.present? and entries.count < max_entries) and 

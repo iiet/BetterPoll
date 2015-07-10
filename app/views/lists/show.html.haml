@@ -24,5 +24,18 @@
 %pre
   = "[betterpoll=#{@list.id}][/betterpoll]"
 
-.btn-group
-  = link_to 'Back', lists_path, class: "btn btn-default"
+/ .btn-group
+/   = link_to 'Back', lists_path, class: "btn btn-default"
+
+%h3 Entries
+
+%table.table
+  %thead
+    %tr
+      - @list.public_list_fields.each do |f|
+        %th= f.name
+  %tbody
+    %tr
+      - @list.entries.each do |e|
+        - @list.public_list_fields.each do |f|
+          %td= e.entry_fields_map[f].value
