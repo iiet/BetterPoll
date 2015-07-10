@@ -5,7 +5,7 @@ class TextEntryField < EntryField
   validates :value, presence: true, if: -> { field.required }
   validate do
     errors.add(:value, "is too long") if value.respond_to?(:length) and
-      value.length > field.max_length
+      field.max_length.present? and value.length > field.max_length
   end
 
 end

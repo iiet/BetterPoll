@@ -12,9 +12,9 @@ class Entry
     # max entries
   validate do
     errors.add(:list, 'too many entries') if list.max_entries.present? and 
-      list.entries.count + (new_record? ? 1 : 0) > list.max_entries
+      list.entries.count > list.max_entries
     errors.add(:list, 'you have too many entries') if list.max_entries_per_user.present? and 
-      list.entries.select {|e| e.user == user}.count + (new_record? ? 1 : 0) > list.max_entries_per_user
+      list.entries.select {|e| e.user == user}.count> list.max_entries_per_user
     
   end
 

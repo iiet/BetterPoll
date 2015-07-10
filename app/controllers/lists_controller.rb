@@ -8,9 +8,16 @@ class ListsController < ApplicationController
   end
 
   def create_entry
-    entry = @list.entries.new(entry_params.merge(user: current_user))
-    entry.save
-    redirect_to @list
+    @entry = @list.entries.new(entry_params.merge(user: current_user))
+    respond_to do |format|
+      if @entry.save
+        format.html { redirect_to @list, notice: "You've been enrolled successfully" }
+        # format.json { render :show, status: :created, location: my_list_path(@list) }
+      else
+        format.html { render :new_entry }
+        # format.json { render json: @list.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def iframe
