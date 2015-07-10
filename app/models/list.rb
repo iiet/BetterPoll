@@ -4,7 +4,7 @@ class List
 
   field :name, type: String
   field :max_entries, type: Integer
-  field :max_entries_per_user, type: Integer
+  field :max_entries_per_user, type: Integer, default: 1
 
 
   belongs_to :owner, class_name: 'User'
@@ -22,6 +22,11 @@ class List
   validates_presence_of :name
   validates_numericality_of :max_entries, only_integer: true, greater_than: 0, if: -> { max_entries.present? }
   validates_numericality_of :max_entries_per_user, only_integer: true, greater_than: 0, if: -> { max_entries_per_user.present? }
+
+  def can_enroll?(user)
+    (max_entries.present? and entries.count < max_entries) and 
+    (max_entries_per_user.present? and entries.select{|e| e.user == user}.count < max_entries_per_user)
+  end
 
   def instant_enroll?
     list_fields.select {|f| f.class != UserField}.empty?
