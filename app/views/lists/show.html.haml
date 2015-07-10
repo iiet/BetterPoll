@@ -1,5 +1,8 @@
 %h1
   = @list.name
+  %small
+    by
+    = @list.owner_full_name
   = render partial: 'enroll_button', locals: {list: @list}
 %h3
   Enrolled count:
@@ -14,10 +17,10 @@
       \::
       = f.name
 
-%h3 Iframe embed code
+%h4 Iframe embed code
 %pre
   = "<iframe src=\"#{iframe_list_url(@list)}\" style=\"width:500px; height: 70px; border:none;\"></iframe>"
-%h3 BBcode embed code
+%h4 BBcode embed code
 %pre
   = "[betterpoll=#{@list.id}][/betterpoll]"
 

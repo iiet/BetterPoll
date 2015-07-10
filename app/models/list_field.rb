@@ -9,4 +9,6 @@ class ListField
   def build_entry_field
     self.class.to_s.gsub('Field', 'EntryField').constantize.new(field_id: self.id)
   end
+
+  validates :name, presence: true
 end

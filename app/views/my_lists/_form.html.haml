@@ -15,5 +15,4 @@
           = link_to_add_association 'Add boolean field', f, :list_fields, partial: 'boolean_field_fields', wrap_object: Proc.new {|o| BooleanField.new(o.attributes) }, class: "btn btn-default"
   .form-actions
     .btn-group.pull-right
-      = link_to 'Back', lists_path, class: "btn btn-default"
       = f.button :submit, class: "btn-success"
