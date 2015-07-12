@@ -5,4 +5,4 @@
       = f.simple_fields_for :entry_fields do |field|
         = render "entries/#{field.object.model_name.singular}", :f => field
   .form-actions
-    = f.button :submit, class: 'btn-lg'
+    = f.button :submit, value: 'Enroll', class: 'btn-lg btn-success'

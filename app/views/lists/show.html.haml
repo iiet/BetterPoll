@@ -32,10 +32,13 @@
 %table.table
   %thead
     %tr
+      %th Created at
       - @list.public_list_fields.each do |f|
         %th= f.name
   %tbody
-    %tr
-      - @list.entries.each do |e|
+    
+    - @list.entries.each do |e|
+      %tr
+        %td= e.created_at
         - @list.public_list_fields.each do |f|
           %td= e.entry_fields_map[f].value
