@@ -8,7 +8,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :my_lists
+  resources :my_lists do
+    member do
+      get 'export'
+    end
+  end
 
   root to: 'lists#index'
   # The priority is based upon order of creation: first created -> highest priority.

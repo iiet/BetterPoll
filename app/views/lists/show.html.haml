@@ -27,18 +27,21 @@
 / .btn-group
 /   = link_to 'Back', lists_path, class: "btn btn-default"
 
-%h3 Entries
+- if @list.public_list_fields.count > 0
+  %h3 
+    Entries
+    %small displaying only public fields
 
-%table.table
-  %thead
-    %tr
-      %th Created at
-      - @list.public_list_fields.each do |f|
-        %th= f.name
-  %tbody
-    
-    - @list.entries.each do |e|
+  %table.table
+    %thead
       %tr
-        %td= e.created_at
+        %th Created at
         - @list.public_list_fields.each do |f|
-          %td= e.entry_fields_map[f].value
+          %th= f.name.humanize
+    %tbody
+      
+      - @list.entries.each do |e|
+        %tr
+          %td= e.created_at
+          - @list.public_list_fields.each do |f|
+            %td= e.entry_fields_map[f].value

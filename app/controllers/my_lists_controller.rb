@@ -1,5 +1,6 @@
+require 'csv'
 class MyListsController < ApplicationController
-  before_action :set_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_list, only: [:show, :edit, :update, :destroy, :export]
   before_action :authenticate_user!
 
   # GET /lists
@@ -20,6 +21,18 @@ class MyListsController < ApplicationController
 
   # GET /lists/1/edit
   def edit
+  end
+
+  def export
+    csv = CSV.generate do |csv|
+      csv << @list.list_fields.map {|f| f.name}
+      @list.entries.each do |e|
+        csv << @list.list_fields.map do |f|
+          e.entry_fields_map[f].value
+        end
+      end
+    end
+    send_data csv, filename: "#{@list.name}-#{Time.now}.csv", type: 'text/csv'
   end
 
   # POST /lists
