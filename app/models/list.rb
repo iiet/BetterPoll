@@ -32,7 +32,7 @@ class List
     reasons = []
     reasons << "too many entries on the list" if (max_entries.present? and entries.count < max_entries)
     reasons << "you made too many entries" if (max_entries_per_user.present? and
-      entries.select{|e| e.user == user}.count < max_entries_per_user)
+      entries.select{|e| e.user_id == user.id}.count < max_entries_per_user)
     reasons
   end
 
