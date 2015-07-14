@@ -17,10 +17,9 @@ class Entry
    # list attributes
     # max entries
   validate do
-    errors.add(:list, 'too many entries') if list.max_entries.present? and 
-      list.entries.count > list.max_entries
-    errors.add(:list, 'you have too many entries') if list.max_entries_per_user.present? and 
-      list.entries.select {|e| e.user == user}.count> list.max_entries_per_user
+    list.why_can_enroll.each do |e|
+      errors.add(:list, e)
+    end
   end
 
 end

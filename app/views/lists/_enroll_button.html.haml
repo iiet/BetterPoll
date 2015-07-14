@@ -1,7 +1,6 @@
 - if current_user
   - unless list.can_enroll? current_user
-    %button.btn.btn-disabled.btn-primary{disabled: 'disabled'} 
-      / TODO move to tooltip or sth, alt: list.why_cannot_enroll(current_user)  .join("\n")}
+    %span.btn.btn-disabled.btn-primary.cannot_enroll{disabled: 'disabled', :"data-why-cannot-enroll" => list.why_cannot_enroll(current_user).join("<br/>")} 
       can't enroll
       = "(#{pluralize(list.entries.count,'entry')})"
   - else

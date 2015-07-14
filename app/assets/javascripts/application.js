@@ -15,4 +15,23 @@
 //= require cocoon
 //= require jquery_ujs
 //= require turbolinks
+//= require qtip2/jquery.qtip.js
 //= require_tree .
+
+// Create the tooltips only when document ready
+ $(document).ready(function()
+ {
+     // MAKE SURE YOUR SELECTOR MATCHES SOMETHING IN YOUR HTML!!!
+     $('.cannot_enroll').each(function() {
+        console.log($(this));
+         $(this).qtip({
+             content: {
+                 text: $(this).attr("data-why-cannot-enroll")
+             },
+             position: {
+                 target: 'mouse', // Position it where the click was...
+                 adjust: { mouse: false } // ...but don't follow the mouse
+             },
+         });
+     });
+ });
