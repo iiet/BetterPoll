@@ -1,4 +1,3 @@
-%p#notice= notice
 %h1 
   My lists
   = link_to 'New List', new_my_list_path, class: "btn btn-default btn-lg"
@@ -19,5 +18,5 @@
           .btn-group
             = link_to 'Show', my_list_path(list), class: "btn btn-primary"
             = link_to 'Edit', edit_my_list_path(list), class: "btn btn-warning"
-            = link_to 'Destroy', my_list_path(list), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+            / = link_to 'Destroy', my_list_path(list), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
 

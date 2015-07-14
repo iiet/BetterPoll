@@ -21,7 +21,6 @@ class Entry
       list.entries.count > list.max_entries
     errors.add(:list, 'you have too many entries') if list.max_entries_per_user.present? and 
       list.entries.select {|e| e.user == user}.count> list.max_entries_per_user
-    
   end
 
 end

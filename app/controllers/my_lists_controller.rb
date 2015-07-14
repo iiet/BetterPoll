@@ -32,13 +32,13 @@ class MyListsController < ApplicationController
         end
       end
     end
-    send_data csv, filename: "#{@list.name}-#{Time.now}.csv", type: 'text/csv'
+    send_data csv, filename: "#{@list.name.parameterize}-#{Time.now.iso8601}.csv", type: 'text/csv'
   end
 
   # POST /lists
   # POST /lists.json
   def create
-    @list = current_user.lists.new(list_params)
+    @list = current_user.lists.new(new_list_params)
 
     respond_to do |format|
       if @list.save
@@ -55,7 +55,7 @@ class MyListsController < ApplicationController
   # PATCH/PUT /lists/1.json
   def update
     respond_to do |format|
-      if @list.update(list_params)
+      if @list.update(existing_list_params)
         format.html { redirect_to my_list_path(@list), notice: 'List was successfully updated.' }
         format.json { render :show, status: :ok, location: my_list_path(@list) }
       else
@@ -86,7 +86,7 @@ class MyListsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def list_params
+    def new_list_params
       params.require(:list).permit(:name, :max_entries, :max_entries_per_user,
       list_fields_attributes: 
         [
@@ -98,5 +98,8 @@ class MyListsController < ApplicationController
           :required,
           :public
         ])
+    end
+    def existing_list_params
+      params.require(:list).permit(:name, :max_entries, :max_entries_per_user)
     end
 end

@@ -4,15 +4,16 @@
     = f.input :name
     = f.input :max_entries
     = f.input :max_entries_per_user
-    %h3 Fields
-    #list_fields
-      = f.simple_fields_for :list_fields do |field|
-        = render "#{field.object.model_name.singular}_fields", :f => field
-      .links
-        .btn-group
-          = link_to_add_association 'Add user field', f, :list_fields, partial: 'user_field_fields', wrap_object: Proc.new {|o| UserField.new(o.attributes) }, class: "btn btn-default"
-          = link_to_add_association 'Add text field', f, :list_fields, partial: 'text_field_fields', wrap_object: Proc.new {|o| TextField.new(o.attributes) }, class: "btn btn-default"
-          = link_to_add_association 'Add boolean field', f, :list_fields, partial: 'boolean_field_fields', wrap_object: Proc.new {|o| BooleanField.new(o.attributes) }, class: "btn btn-default"
+    -if @list.new_record?
+      %h3 Fields
+      #list_fields
+        = f.simple_fields_for :list_fields do |field|
+          = render "#{field.object.model_name.singular}_fields", :f => field
+        .links
+          .btn-group
+            = link_to_add_association 'Add user field', f, :list_fields, partial: 'user_field_fields', wrap_object: Proc.new {|o| UserField.new(o.attributes) }, class: "btn btn-default"
+            = link_to_add_association 'Add text field', f, :list_fields, partial: 'text_field_fields', wrap_object: Proc.new {|o| TextField.new(o.attributes) }, class: "btn btn-default"
+            = link_to_add_association 'Add boolean field', f, :list_fields, partial: 'boolean_field_fields', wrap_object: Proc.new {|o| BooleanField.new(o.attributes) }, class: "btn btn-default"
   .form-actions
     .btn-group.pull-right
       = f.button :submit, class: "btn-success btn-lg"

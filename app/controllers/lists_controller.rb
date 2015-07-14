@@ -1,14 +1,15 @@
 class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy, :new_entry, :create_entry, :iframe]
   before_action :authenticate_user!
-  before_action :check_ownership, only: [:edit, :update, :destroy]
 
   def new_entry
-    @entry = @list.entries.new(entry_fields: @list.list_fields.map { |f| f.build_entry_field })
+    @entry = @list.entries.new(entry_fields: @list.list_fields.map(&:build_entry_field))
   end
 
   def create_entry
     @entry = @list.entries.new(entry_params.merge(user: current_user))
+    @entry.entry_fields << @list.list_fields.select {|a| a.is_a?(UserField) }.map(&:build_entry_field)
+
     respond_to do |format|
       if @entry.save
         format.html { redirect_to @list, notice: "You've been enrolled successfully" }
@@ -36,9 +37,6 @@ class ListsController < ApplicationController
   end
 
   private
-    def check_ownership
-      raise NotAuthorized if @list.owner_id != current_user.id
-    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_list

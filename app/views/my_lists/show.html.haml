@@ -1,5 +1,50 @@
-%p#notice= notice
+%h1
+  = @list.name
+  %small
+    your list
+  .btn-group.pull-right
+    = link_to 'Edit', edit_my_list_path(@list), class: "btn btn-warning"
+    = link_to 'Export to CSV', export_my_list_path(@list), class: "btn btn-default"
+    = link_to 'Destroy', my_list_path(@list), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
 
-.btn-group
-  = link_to 'Back', lists_path, class: "btn btn-default"
-  = link_to 'Edit', edit_list_path(@list), class: "btn btn-warning"
+%h3
+  Enrolled count:
+  = @list.entries.count
+
+%h3 Fields
+%ul
+  - @list.list_fields.each do |f|
+    %li
+      = f.public ? "PUBLIC" : ""
+      = f.model_name.human
+      \::
+      = f.name
+
+%h4 Iframe embed code
+%pre
+  = "<iframe src=\"#{iframe_list_url(@list)}\" style=\"width:500px; height: 70px; border:none;\"></iframe>"
+%h4 BBcode embed code
+%pre
+  = "[betterpoll=#{@list.id}][/betterpoll]"
+
+/ .btn-group
+/   = link_to 'Back', lists_path, class: "btn btn-default"
+
+- if @list.list_fields.count > 0
+  %h3 
+    Entries
+    %small displaying all fields
+
+  %table.table
+    %thead
+      %tr
+        %th Created at
+        - @list.list_fields.each do |f|
+          %th= f.name.humanize
+    %tbody
+      
+      - @list.entries.each do |e|
+        %tr
+          %td= e.created_at
+          - @list.list_fields.each do |f|
+            %td= e.entry_fields_map[f].value
