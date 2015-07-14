@@ -17,7 +17,7 @@ class Entry
    # list attributes
     # max entries
   validate do
-    list.why_can_enroll.each do |e|
+    list.why_cannot_enroll(user).each do |e|
       errors.add(:list, e)
     end
   end
