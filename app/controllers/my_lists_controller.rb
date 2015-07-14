@@ -1,7 +1,7 @@
 require 'csv'
 class MyListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy, :export]
-  before_action :authenticate_user!
+  before_action :check_user
 
   # GET /lists
   # GET /lists.json

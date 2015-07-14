@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy, :new_entry, :create_entry, :iframe]
-  before_action :authenticate_user!
+  before_action :check_user
 
   def new_entry
     @entry = @list.entries.new(entry_fields: @list.list_fields.map(&:build_entry_field))
