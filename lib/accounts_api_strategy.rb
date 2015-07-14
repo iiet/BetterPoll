@@ -25,8 +25,7 @@ module OmniAuth
       option :authorize_params, { scope: ['public','extended','transcript_number'].join(" ") }
 
       def raw_info
-        @raw_info ||= access_token.get('/oauth/v1/extended').parsed
-        @raw_info.merge(access_token.get('/oauth/v1/transcript_number').parsed)
+        @raw_info ||= access_token.get('/oauth/v1/extended').parsed.merge(access_token.get('/oauth/v1/transcript_number').parsed)
       end
     end
   end
