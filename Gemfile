@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '2.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.2'
@@ -54,3 +54,4 @@ gem 'devise-bootstrap-views'
 gem 'omniauth'
 gem 'omniauth-oauth2'
 gem 'figaro'
+gem 'rails_12factor'
