@@ -2,7 +2,7 @@
 # Many of these configuration options can be set straight in your model.
 require Rails.root.join('lib','accounts_api_strategy.rb')
 Devise.setup do |config|
-  config.omniauth :accounts_api, ENV['ACCOUNTS_OAUTH_KEY'], ENV['ACCOUNTS_OAUTH_SECRET']
+  config.omniauth :accounts_api, ENV['ACCOUNTS_OAUTH_KEY'].strip, ENV['ACCOUNTS_OAUTH_SECRET'].strip
   config.sign_out_via = [ :delete, :get ]
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
