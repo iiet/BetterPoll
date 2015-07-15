@@ -8,12 +8,12 @@
       %h3 Fields
       #list_fields
         = f.simple_fields_for :list_fields do |field|
-          = render "#{field.object.model_name.singular}_fields", :f => field
+          = render "entries/#{field.object.model_name.singular}", :f => field
         .links
           .btn-group
-            = link_to_add_association 'Add user field', f, :list_fields, partial: 'user_field_fields', wrap_object: Proc.new {|o| Field::User.new(o.attributes) }, class: "btn btn-default"
-            = link_to_add_association 'Add text field', f, :list_fields, partial: 'text_field_fields', wrap_object: Proc.new {|o| Field::Text.new(o.attributes) }, class: "btn btn-default"
-            = link_to_add_association 'Add boolean field', f, :list_fields, partial: 'boolean_field_fields', wrap_object: Proc.new {|o| Field::Boolean.new(o.attributes) }, class: "btn btn-default"
+            = link_to_add_association 'Add user field', f, :list_fields, partial: 'entries/field_user', wrap_object: Proc.new {|o| Field::User.new(o.attributes) }, class: "btn btn-default"
+            = link_to_add_association 'Add text field', f, :list_fields, partial: 'entries/field_text', wrap_object: Proc.new {|o| Field::Text.new(o.attributes) }, class: "btn btn-default"
+            = link_to_add_association 'Add boolean field', f, :list_fields, partial: 'entries/field_boolean', wrap_object: Proc.new {|o| Field::Boolean.new(o.attributes) }, class: "btn btn-default"
   .form-actions
     .btn-group.pull-right
       = f.button :submit, class: "btn-success btn-lg"
