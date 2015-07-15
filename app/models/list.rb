@@ -24,8 +24,10 @@ class List
   validates_numericality_of :max_entries, only_integer: true, greater_than: 0, if: -> { max_entries.present? }
   validates_numericality_of :max_entries_per_user, only_integer: true, greater_than: 0, if: -> { max_entries_per_user.present? }
 
-  def public_list_fields
-    list_fields.select {|f| f.public}
+  def public_list_fields(type = nil)
+    @fields = list_fields.select {|f| f.public}
+    @fields.select! {|f| f.is_a?(type)} if type.present?
+    @fields
   end
 
   def why_cannot_enroll(user, new_record = false)

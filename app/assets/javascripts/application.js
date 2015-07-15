@@ -23,7 +23,6 @@
  {
      // MAKE SURE YOUR SELECTOR MATCHES SOMETHING IN YOUR HTML!!!
      $('.cannot_enroll').each(function() {
-        console.log($(this));
          $(this).qtip({
              content: {
                  text: $(this).attr("data-why-cannot-enroll")
@@ -31,6 +30,17 @@
              position: {
                  target: 'mouse', // Position it where the click was...
                  adjust: { mouse: false } // ...but don't follow the mouse
+             },
+         });
+     });
+     $('.instant-enroll').each(function() {
+         $(this).qtip({
+             content: {
+                 text: $(this).attr("data-user-public-fields")
+             },
+             position: {
+                 my: 'center right',  // Position my top left...
+                 at: 'center left', // at the bottom right of...
              },
          });
      });
