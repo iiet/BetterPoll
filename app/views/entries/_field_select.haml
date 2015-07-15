@@ -1,0 +1,18 @@
+.nested-fields
+  = render partial: 'field_header', locals: { f: f }
+  = f.input :name
+  = f.input :public, as: :boolean
+  = f.input :required, as: :boolean
+  
+  #select_options
+    %h4
+      Options
+      
+    = f.simple_fields_for :select_options do |option|
+      = render "entries/field_select_option", :f => option
+    .links
+      .btn-group
+        = link_to_add_association 'Add option', f, :select_options, partial: 'entries/field_select_option', class: "btn btn-default"
+    
+        
+  = f.hidden_field :_type, value: 'Field::Select'

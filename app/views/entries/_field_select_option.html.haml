@@ -1,0 +1,8 @@
+.nested-fields
+  %h5
+    Option
+    = link_to_remove_association "remove option", f, class: "btn btn-sm btn-danger", style: "margin-bottom:15px"
+  = f.input :name
+  = f.input :description
+  = f.input :max_entries
+  

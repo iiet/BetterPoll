@@ -96,7 +96,15 @@ class MyListsController < ApplicationController
           :name,
           :max_length,
           :required,
-          :public
+          :public,
+          select_options_attributes:
+            [
+              :name,
+              :id,
+              :_destroy,
+              :description,
+              :max_entries
+            ]
         ])
     end
     def existing_list_params

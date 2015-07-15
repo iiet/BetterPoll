@@ -50,7 +50,8 @@ class ListsController < ApplicationController
           [
             :_type,
             :field_id,
-            :value
+            :value,
+            :option_id
           ]
         )
       rescue

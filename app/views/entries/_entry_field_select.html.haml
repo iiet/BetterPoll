@@ -1,0 +1,4 @@
+.nested-fields
+  = f.input :option_id, label: f.object.field.name, collection: f.object.field.select_options
+  = f.hidden_field :field_id, value: f.object.field_id
+  = f.hidden_field :_type, value: 'EntryField::Select'
