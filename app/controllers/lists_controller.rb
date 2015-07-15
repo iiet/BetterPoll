@@ -8,7 +8,7 @@ class ListsController < ApplicationController
 
   def create_entry
     @entry = @list.entries.new(entry_params.merge(user: current_user))
-    @entry.entry_fields << @list.list_fields.select {|a| a.is_a?(UserField) }.map(&:build_entry_field)
+    @entry.entry_fields << @list.list_fields.select {|a| a.is_a?(Field::User) }.map(&:build_entry_field)
 
     respond_to do |format|
       if @entry.save

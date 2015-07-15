@@ -1,2 +1,0 @@
-class BooleanField < ListField
-end

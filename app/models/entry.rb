@@ -3,7 +3,7 @@ class Entry
   include Mongoid::Timestamps
 
   belongs_to :user
-  embeds_many :entry_fields
+  embeds_many :entry_fields, class_name: 'EntryField::Base'
   embedded_in :list
 
   accepts_nested_attributes_for :entry_fields, :reject_if => :all_blank, :allow_destroy => true

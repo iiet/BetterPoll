@@ -7,13 +7,12 @@ class List
   field :max_entries, type: Integer
   field :max_entries_per_user, type: Integer, default: 1
 
-
   belongs_to :owner, class_name: 'User'
   field :owner_full_name, type: String, default: "" # cache
 
   has_many :users
 
-  embeds_many :list_fields
+  embeds_many :list_fields, class_name: 'Field::Base'
   embeds_many :entries
 
   accepts_nested_attributes_for :list_fields, :reject_if => :all_blank, :allow_destroy => true
@@ -48,7 +47,7 @@ class List
   end
 
   def instant_enroll?
-    list_fields.select {|f| f.class != UserField}.empty?
+    list_fields.select {|f| !f.is_a?(Field::User)}.empty?
   end
 
   def is_enroled?(user)
