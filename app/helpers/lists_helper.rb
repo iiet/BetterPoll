@@ -5,6 +5,6 @@ module ListsHelper
 
   def user_public_fields_msg(list)
     fields = list.public_list_fields(UserField)
-    fields.count > 0 ? "You will share publicly your #{fields.map(&:name).join(', ')}" : ""
+    fields.count > 0 ? "You will publicly share your #{fields.map(&:name).join(', ')}" : nil
   end
 end

@@ -19,7 +19,7 @@
 //= require_tree .
 
 // Create the tooltips only when document ready
- $(document).ready(function()
+var ready = function()
  {
      // MAKE SURE YOUR SELECTOR MATCHES SOMETHING IN YOUR HTML!!!
      $('.cannot_enroll').each(function() {
@@ -33,7 +33,7 @@
              },
          });
      });
-     $('.instant-enroll').each(function() {
+     $('.instant-enroll[data-user-public-fields]').each(function() {
          $(this).qtip({
              content: {
                  text: $(this).attr("data-user-public-fields")
@@ -44,4 +44,6 @@
              },
          });
      });
- });
+ };
+$(document).ready(ready);
+$(document).on('page:load', ready);
