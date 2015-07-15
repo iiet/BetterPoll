@@ -1,2 +1,3 @@
-%li= link_to 'Browse lists', lists_path
-%li= link_to 'My lists', my_lists_path
+%li{class: (controller_name == 'lists') ? 'active' : ''}= link_to 'Browse lists', lists_path
+-p controller_name
+%li{class: (controller_name == 'my_lists') ? 'active' : ''}= link_to 'My lists', my_lists_path
