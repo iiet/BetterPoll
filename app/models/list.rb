@@ -28,11 +28,12 @@ class List
     list_fields.select {|f| f.public}
   end
 
-  def why_cannot_enroll(user) # TODO change behaviour if new record or not
+  def why_cannot_enroll(user, new_record = false)
     reasons = []
-    reasons << "too many entries on the list" if (max_entries.present? and entries.count >= max_entries)
-    reasons << "you made too many entries" if (max_entries_per_user.present? and
-      entries.select{|e| e.user_id == user.id}.count >= max_entries_per_user)
+    reasons << "too many entries on the list" if (max_entries.present? &&
+      entries.count + (new_record ? 0 : 1) > max_entries)
+    reasons << "you made too many entries" if (max_entries_per_user.present? &&
+      entries.select{|e| e.user_id == user.id}.count + (new_record ? 0 : 1) > max_entries_per_user)
     reasons
   end
 
