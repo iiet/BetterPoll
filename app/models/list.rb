@@ -20,9 +20,13 @@ class List
 
   validates_associated :list_fields
   validates_associated :entries
-  validates_presence_of :name
+  validates_presence_of :name, :list_fields
   validates_numericality_of :max_entries, only_integer: true, greater_than: 0, if: -> { max_entries.present? }
   validates_numericality_of :max_entries_per_user, only_integer: true, greater_than: 0, if: -> { max_entries_per_user.present? }
+
+  before_save do
+    self.owner_full_name = owner.full_name
+  end
 
   def public_list_fields(type = nil)
     @fields = list_fields.select {|f| f.public}
@@ -39,7 +43,6 @@ class List
     reasons
   end
 
-
   def can_enroll?(user)
     why_cannot_enroll(user).empty?
   end
@@ -55,9 +58,4 @@ class List
   def fields_map
     @fields_map ||= Hash[list_fields.map {|f| [f.id, f]}]
   end
-
-  before_save do
-    self.owner_full_name = owner.full_name
-  end
-
 end
