@@ -43,7 +43,7 @@ class User
   has_many :lists, foreign_key: 'owner_id'
 
   def self.find_for_accounts_api(data)
-    @user = User.find_by(accounts_api_id: data['uid'])
+    @user = User.find_by(accounts_api_id: data['uid']) rescue nil
     unless @user
       @user = User.create!(
         email: data['info']['email'],
