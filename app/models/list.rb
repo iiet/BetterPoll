@@ -14,8 +14,12 @@ class List
 
   embeds_many :list_fields, class_name: 'Field::Base'
   embeds_many :entries
+  embeds_one :update_time_logic, class_name: 'TimeLogic', autobuild: true
+  embeds_one :destroy_time_logic, class_name: 'TimeLogic', autobuild: true
+  embeds_one :create_time_logic, class_name: 'TimeLogic', autobuild: true
 
   accepts_nested_attributes_for :list_fields, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :update_time_logic, :create_time_logic, :destroy_time_logic
 
   validates_associated :list_fields
   validates_associated :entries

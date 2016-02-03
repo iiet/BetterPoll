@@ -4,6 +4,20 @@
     = f.input :name
     = f.input :max_entries
     = f.input :max_entries_per_user
+    .row
+      .col-md-4
+        %h3 New entry time logic
+        = f.simple_fields_for :create_time_logic do |field|
+          = render 'time_logic', f: field, include_relative: false
+      .col-md-4
+        %h3 Update entry time logic
+        = f.simple_fields_for :update_time_logic do |field|
+          = render 'time_logic', f: field, include_relative: true
+      .col-md-4
+        %h3 Delete entry time logic
+        = f.simple_fields_for :destroy_time_logic do |field|
+          = render 'time_logic', f: field, include_relative: true
+
     -if @list.new_record?
       %h3 Fields
       #list_fields

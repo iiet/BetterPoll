@@ -86,8 +86,32 @@ class MyListsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+
+    COMMON_LIST_PARAMS = [
+      :name, :max_entries, :max_entries_per_user,
+      update_time_logic_attributes:
+        [
+          :id,
+          :end_time_after_create,
+          :start_time_absolute,
+          :end_time_absolute
+        ],
+      destroy_time_logic_attributes:
+        [
+          :id,
+          :end_time_after_create,
+          :start_time_absolute,
+          :end_time_absolute
+        ],
+      create_time_logic_attributes:
+        [
+          :id,
+          :start_time_absolute,
+          :end_time_absolute
+        ],
+    ]
     def new_list_params
-      params.require(:list).permit(:name, :max_entries, :max_entries_per_user,
+      params.require(:list).permit(*COMMON_LIST_PARAMS.merge(
       list_fields_attributes: 
         [
           :id,
@@ -105,9 +129,9 @@ class MyListsController < ApplicationController
               :description,
               :max_entries
             ]
-        ])
+        ]))
     end
     def existing_list_params
-      params.require(:list).permit(:name, :max_entries, :max_entries_per_user)
+      params.require(:list).permit(*COMMON_LIST_PARAMS)
     end
 end

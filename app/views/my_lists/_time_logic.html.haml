@@ -1,0 +1,6 @@
+.nested-fields
+  = f.error_notification
+  = f.input :start_time_absolute, as: :datetime_picker
+  - if include_relative
+    = f.input :end_time_after_create, as: :time_picker
+  = f.input :end_time_absolute, as: :datetime_picker

@@ -16,6 +16,10 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require qtip2/jquery.qtip.js
+//= require moment
+//= require bootstrap-datetimepicker
+//= require pickers
+//= require moment/pl
 //= require_tree .
 
 // Create the tooltips only when document ready

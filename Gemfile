@@ -42,6 +42,7 @@ source 'https://rubygems.org' do
     gem 'httplog'
     gem 'rspec-rails'
     gem 'factory_girl'
+    gem 'pry'
   end
 
   # mongo
@@ -58,6 +59,8 @@ source 'https://rubygems.org' do
   gem 'omniauth-oauth2'
   gem 'figaro'
   gem 'rails_12factor'
+  gem 'momentjs-rails', '~> 2.9',  :github => 'derekprior/momentjs-rails'
+  gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
 end
 
 source 'https://rails-assets.org/' do
