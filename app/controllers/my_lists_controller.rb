@@ -103,7 +103,7 @@ class MyListsController < ApplicationController
           :start_time_absolute,
           :end_time_absolute
         ],
-      create_time_logic_attributes:
+      enroll_time_logic_attributes:
         [
           :id,
           :start_time_absolute,
@@ -111,7 +111,7 @@ class MyListsController < ApplicationController
         ],
     ]
     def new_list_params
-      params.require(:list).permit(*COMMON_LIST_PARAMS.merge(
+      params.require(:list).permit(*(COMMON_LIST_PARAMS + [
       list_fields_attributes: 
         [
           :id,
@@ -129,7 +129,8 @@ class MyListsController < ApplicationController
               :description,
               :max_entries
             ]
-        ]))
+        ]
+      ]))
     end
     def existing_list_params
       params.require(:list).permit(*COMMON_LIST_PARAMS)

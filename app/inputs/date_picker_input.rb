@@ -31,7 +31,7 @@ class DatePickerInput < SimpleForm::Inputs::StringInput
 
   def set_value_html_option
     return unless value.present?
-    input_html_options[:value] ||= I18n.localize(value, format: display_pattern)
+    input_html_options[:value] ||= value.iso8601
   end
 
   def value

@@ -16,10 +16,10 @@ class List
   embeds_many :entries
   embeds_one :update_time_logic, class_name: 'TimeLogic', autobuild: true
   embeds_one :destroy_time_logic, class_name: 'TimeLogic', autobuild: true
-  embeds_one :create_time_logic, class_name: 'TimeLogic', autobuild: true
+  embeds_one :enroll_time_logic, class_name: 'TimeLogic', autobuild: true
 
   accepts_nested_attributes_for :list_fields, :reject_if => :all_blank, :allow_destroy => true
-  accepts_nested_attributes_for :update_time_logic, :create_time_logic, :destroy_time_logic
+  accepts_nested_attributes_for :update_time_logic, :enroll_time_logic, :destroy_time_logic
 
   validates_associated :list_fields
   validates_associated :entries
@@ -43,11 +43,12 @@ class List
       entries.count + (new_record ? 0 : 1) > max_entries)
     reasons << "you made too many entries" if (max_entries_per_user.present? &&
       entries.select{|e| e.user_id == user.id}.count + (new_record ? 0 : 1) > max_entries_per_user)
+    reasons += enroll_time_logic.reasons
     reasons
   end
 
   def can_enroll?(user)
-    why_cannot_enroll(user).empty?
+    why_cannot_enroll(user).empty? && enroll_time_logic.is_allowed?
   end
 
   def instant_enroll?
