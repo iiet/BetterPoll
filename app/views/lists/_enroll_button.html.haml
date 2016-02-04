@@ -5,6 +5,6 @@
       = "(#{pluralize(list.entries.count,'entry')})"
   - else
     -if list.instant_enroll?
-      = link_to "Enroll (#{pluralize(list.entries.count,'entry')} already)", entries_list_path(list), class: 'btn btn-primary instant-enroll', method: 'post', :"data-user-public-fields" => user_public_fields_msg(list)
+      = link_to "Enroll (#{pluralize(list.entries.count,'entry')} already)", list_entries_path(list), class: 'btn btn-primary instant-enroll', method: 'post', :"data-user-public-fields" => user_public_fields_msg(list)
     -else
-      = link_to "Enroll (#{pluralize(list.entries.count,'entry')} already)", new_entry_list_path(list), class: 'btn btn-primary', target: '_blank'
+      = link_to "Enroll (#{pluralize(list.entries.count,'entry')} already)", new_list_entry_path(list), class: 'btn btn-primary', target: '_blank'

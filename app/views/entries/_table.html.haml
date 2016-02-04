@@ -1,0 +1,20 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th Created at
+      - fields.each do |f|
+        %th= f.name.humanize
+      %th
+  %tbody
+    
+    - entries.each do |e|
+      %tr
+        %td= e.created_at
+        - fields.each do |f|
+          %td= e.entry_fields_map[f].value
+        %td
+          .btn-group
+            - if e.can_be_updated?(current_user)
+              = link_to 'edit', edit_list_entry_path(@list, e), class: 'btn btn-success btn-xs'
+            - if e.can_be_destroyed?(current_user)
+              = link_to 'destroy', list_entry_path(@list, e), method: :delete, data: {confirm: "Are you sure you want to delete entry?"}, class: 'btn btn-xs btn-danger'

@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"}
   resources :lists do
+    resources :entries
     member do
-      get 'new_entry'
-      post 'entries', to: 'lists#create_entry'
       get 'iframe'
     end
   end

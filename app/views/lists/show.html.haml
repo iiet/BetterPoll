@@ -19,29 +19,21 @@
 
 %h4 Iframe embed code
 %pre
-  = "<iframe src=\"#{iframe_list_url(@list)}\" style=\"width:500px; height: 70px; border:none;\"></iframe>"
+  = @list.iframe_embed_code
 %h4 BBcode embed code
 %pre
-  = "[betterpoll=#{@list.id}][/betterpoll]"
+  = @list.bbcode_embed_code
 
 / .btn-group
 /   = link_to 'Back', lists_path, class: "btn btn-default"
+
+- if @list.entries_by(current_user).count > 0
+  %h3 Your entries
+  = render partial: 'entries/table', locals: {list: @list, entries: @list.entries_by(current_user), fields: @list.list_fields}
 
 - if @list.public_list_fields.count > 0
   %h3 
     Entries
     %small displaying only public fields
 
-  %table.table
-    %thead
-      %tr
-        %th Created at
-        - @list.public_list_fields.each do |f|
-          %th= f.name.humanize
-    %tbody
-      
-      - @list.entries.each do |e|
-        %tr
-          %td= e.created_at
-          - @list.public_list_fields.each do |f|
-            %td= e.entry_fields_map[f].value
+  = render partial: 'entries/table', locals: {list: @list, entries: @list.entries, fields: @list.public_list_fields}

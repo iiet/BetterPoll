@@ -35,16 +35,4 @@
     Entries
     %small displaying all fields
 
-  %table.table
-    %thead
-      %tr
-        %th Created at
-        - @list.list_fields.each do |f|
-          %th= f.name.humanize
-    %tbody
-      
-      - @list.entries.each do |e|
-        %tr
-          %td= e.created_at
-          - @list.list_fields.each do |f|
-            %td= e.entry_fields_map[f].value
+  = render partial: 'entries/table', locals: {list: @list, entries: @list.entries, fields: @list.list_fields}

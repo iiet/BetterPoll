@@ -31,6 +31,10 @@ class List
     self.owner_full_name = owner.full_name
   end
 
+  def entries_by(user)
+    entries.select {|e| e.user == user}
+  end
+
   def public_list_fields(type = nil)
     @fields = list_fields.select {|f| f.public}
     @fields.select! {|f| f.is_a?(type)} if type.present?
@@ -61,5 +65,13 @@ class List
 
   def fields_map
     @fields_map ||= Hash[list_fields.map {|f| [f.id, f]}]
+  end
+
+  def iframe_embed_code
+    "<iframe src=\"#{Rails.application.routes.url_helpers.iframe_list_url(self)}\" style=\"width:500px; height: 70px; border:none;\"></iframe>"
+  end
+
+  def bbcode_embed_code
+    "[betterpoll=#{self.id}][/betterpoll]"
   end
 end
