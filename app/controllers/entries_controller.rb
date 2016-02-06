@@ -27,6 +27,7 @@ class EntriesController < ApplicationController
   end
 
   def destroy
+    raise NotAuthorized unless @entry.can_be_destroyed?(current_user)
     @entry.destroy
     respond_to do |format|
       format.html { redirect_to list_path(@list), notice: 'Entry was successfully destroyed.' }
@@ -35,6 +36,7 @@ class EntriesController < ApplicationController
   end
 
   def update
+    raise NotAuthorized unless @entry.can_be_updated?(current_user)
     respond_to do |format|
       if @entry.update(entry_params)
         format.html { redirect_to list_path(@list), notice: 'Entry was successfully updated.' }
@@ -48,7 +50,7 @@ class EntriesController < ApplicationController
 
   private
     def set_list
-      @list = current_user.lists.find(params[:list_id])
+      @list = List.find(params[:list_id])
     end
 
     def set_entry
