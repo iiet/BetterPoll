@@ -3,7 +3,7 @@ class Entry
   include Mongoid::Timestamps
 
   belongs_to :user
-  embeds_many :entry_fields, class_name: 'EntryField::Base'
+  embeds_many :entry_fields, class_name: 'EntryField::Base'p
   embedded_in :list
 
   accepts_nested_attributes_for :entry_fields, :reject_if => :all_blank, :allow_destroy => true
@@ -23,7 +23,7 @@ class Entry
   end
 
   def can_execute?(user)
-    user == list.owner || user == self.user
+    (user == list.owner) || (user == self.user)
   end
 
    # list attributes
