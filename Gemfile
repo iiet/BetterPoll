@@ -2,7 +2,7 @@ ruby '2.2.2'
 source 'https://rubygems.org' do
 
   # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-  gem 'rails', '4.2.2'
+  gem 'rails', '~> 4.2'
   # Use SCSS for stylesheets
   gem 'sass-rails', '~> 5.0'
   # Use Uglifier as compressor for JavaScript assets
@@ -44,6 +44,8 @@ source 'https://rubygems.org' do
     gem 'factory_girl'
     gem 'pry'
   end
+
+  gem 'airbrake'
 
   # mongo
   gem 'mongoid'
