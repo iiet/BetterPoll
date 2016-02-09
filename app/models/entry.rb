@@ -23,7 +23,7 @@ class Entry
   end
 
   def can_execute?(user)
-    (user == list.owner) || (user == self.user)
+    (user.id == list.owner_id) || (user.id == self.user_id)
   end
 
    # list attributes

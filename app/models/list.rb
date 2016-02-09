@@ -32,7 +32,7 @@ class List
   end
 
   def entries_by(user)
-    entries.select {|e| e.user == user}
+    entries.select {|e| e.user_id == user.id}
   end
 
   def public_list_fields(type = nil)
@@ -60,7 +60,7 @@ class List
   end
 
   def is_enroled?(user)
-    entries.detect {|e| e.user == user }.present?
+    entries.detect {|e| e.user_id == user.id }.present?
   end
 
   def fields_map
