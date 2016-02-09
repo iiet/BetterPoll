@@ -27,6 +27,10 @@ module OmniAuth
       def raw_info
         @raw_info ||= access_token.get('/oauth/v1/extended').parsed.merge(access_token.get('/oauth/v1/transcript_number').parsed)
       end
+
+      def callback_url
+        super.split('?').first
+      end
     end
   end
 end
