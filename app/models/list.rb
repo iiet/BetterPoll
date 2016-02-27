@@ -6,6 +6,7 @@ class List
   field :name, type: String
   field :max_entries, type: Integer
   field :max_entries_per_user, type: Integer, default: 1
+  field :listed, type: Mongoid::Boolean, default: true
 
   belongs_to :owner, class_name: 'User'
   field :owner_full_name, type: String, default: "" # cache

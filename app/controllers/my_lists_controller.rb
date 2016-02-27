@@ -88,7 +88,7 @@ class MyListsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
 
     COMMON_LIST_PARAMS = [
-      :name, :max_entries, :max_entries_per_user,
+      :name, :max_entries, :max_entries_per_user, :listed,
       update_time_logic_attributes:
         [
           :id,

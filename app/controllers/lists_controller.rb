@@ -9,7 +9,7 @@ class ListsController < ApplicationController
   # GET /lists
   # GET /lists.json
   def index
-    @lists = List.all.order(:created_at.desc)
+    @lists = List.where(:listed.in => [nil, true]).order(:created_at.desc)
   end
 
   # GET /lists/1
