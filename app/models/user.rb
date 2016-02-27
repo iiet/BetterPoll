@@ -40,6 +40,7 @@ class User
   field :accounts_api_id, type: String
   field :username, type: String
   field :groups, type: Array, default: []
+  field :start_year, type: String
 
   has_many :lists, foreign_key: 'owner_id'
 
@@ -53,7 +54,8 @@ class User
       last_name: data['info']['last_name'],
       transcript_number: data['info']['transcript_number'],
       username: data['info']['username'],
-      groups: data['info']['groups']
+      groups: data['info']['groups'],
+      start_year: data['info']['start_year']
     }
     if @user
       @user.update!(params)
