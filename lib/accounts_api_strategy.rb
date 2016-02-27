@@ -18,7 +18,8 @@ module OmniAuth
           first_name: raw_info['first_name'],
           last_name: raw_info['last_name'],
           email: raw_info['email'],
-          transcript_number: raw_info['transcript_number']
+          transcript_number: raw_info['transcript_number'],
+          groups: raw_info['groups']
         }
       end
 

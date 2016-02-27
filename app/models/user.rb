@@ -39,23 +39,32 @@ class User
   field :transcript_number, type: String
   field :accounts_api_id, type: String
   field :username, type: String
+  field :groups, type: Array, default: []
 
   has_many :lists, foreign_key: 'owner_id'
 
   def self.find_for_accounts_api(data)
     @user = User.find_by(accounts_api_id: data['uid']) rescue nil
-    unless @user
-      @user = User.create!(
-        email: data['info']['email'],
-        accounts_api_id: data['uid'],
-        password: Devise.friendly_token.first(10),
-        first_name: data['info']['first_name'],
-        last_name: data['info']['last_name'],
-        transcript_number: data['info']['transcript_number'],
-        username: data['info']['username']
-      )
+    params = {
+      email: data['info']['email'],
+      accounts_api_id: data['uid'],
+      password: Devise.friendly_token.first(10),
+      first_name: data['info']['first_name'],
+      last_name: data['info']['last_name'],
+      transcript_number: data['info']['transcript_number'],
+      username: data['info']['username'],
+      groups: data['info']['groups']
+    }
+    if @user
+      @user.update!(params)
+    else
+      @user = User.create!(params)
     end
     @user
+  end
+
+  def groups_comma_separated
+    groups.join(",")
   end
 
   def full_name
