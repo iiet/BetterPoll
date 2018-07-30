@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   def check_user
     unless current_user
       store_location_for :user, url_for(:only_path => false)
-      redirect_to user_omniauth_authorize_path(provider: 'accounts_api')
+      redirect_to  user_accounts_api_omniauth_authorize_path(provider: 'accounts_api')
     end
   end
 

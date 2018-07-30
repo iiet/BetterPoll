@@ -1,8 +1,8 @@
-ruby '2.2.2'
+ruby '2.4.4'
 source 'https://rubygems.org' do
 
   # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-  gem 'rails', '~> 4.2'
+  gem 'rails', '~> 5.0.2'
   # Use SCSS for stylesheets
   gem 'sass-rails', '~> 5.0'
   # Use Uglifier as compressor for JavaScript assets
@@ -61,8 +61,8 @@ source 'https://rubygems.org' do
   gem 'omniauth-oauth2'
   gem 'figaro'
   gem 'rails_12factor'
-  gem 'momentjs-rails', '~> 2.9',  :github => 'derekprior/momentjs-rails'
-  gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
+  gem 'momentjs-rails', '~> 2.9',  :git => 'https://github.com/derekprior/momentjs-rails'
+  gem 'datetimepicker-rails', git: 'https://github.com/zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
 end
 
 source 'https://rails-assets.org/' do
